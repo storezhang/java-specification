@@ -57,7 +57,7 @@ condi，此类随意缩写严重降低了代码的可阅读性
     public class ResourceObserver;
     ```
 13. 【推荐】接口类中的方法和属性不要加任何修饰符号（public也不要加），保持代码的简洁性，并加上有效的`Javadoc`注释。
-    尽量不要在接口里定义变量，如果一定要定义变量，肯定是与接口方法相关，并且是整个应用的基础常量
+尽量不要在接口里定义变量，如果一定要定义变量，肯定是与接口方法相关，并且是整个应用的基础常量
     <br><span style="color:green">正例</span>：接口方法签名`void f();`，接口基础常量`String COMPANY = "alibaba";`
     <br><span style="color:red">反例</span>：接口方法定义`public abstract void f();`
     <br><span style="color:orange">说明</span>：JDK8中接口允许有默认实现，那么这个`default`方法，是对所有实现类都有价值的默认实现
@@ -92,7 +92,7 @@ condi，此类随意缩写严重降低了代码的可阅读性
     cache.put(key, value); 
     ```
 2. 【强制】`long`或者`Long`初始赋值时，使用大写的`L`，不能是小写的`l`，小写容易跟数字`1`混淆，造成误解
-   <br><span style="color:orange">说明</span>：`Long a = 2l;`写的是数字的`21`，还是Long型的`2`?
+   <br><span style="color:orange">说明</span>：`Long a = 2l;`写的是数字的`21`，还是`Long`型的`2`?
 3. 【推荐】不要使用一个常量类维护所有常量，按常量功能进行归类，分开维护
    <br><span style="color:orange">说明</span>：大而全的常量类，非得使用查找功能才能定位到修改的常量，不利于理解和维护
    <br><span style="color:green">正例</span>：缓存相关常量放在类`CacheConsts`下；系统配置相关常量放在类`ConfigConsts`下
