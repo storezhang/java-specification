@@ -837,7 +837,7 @@
    <br><span style="color:orange">说明</span>：`MySQL`并不是跳过`offset`行，而是取`offset+N`行，然后返回放弃前`offset`行，
 返回`N`行，那当`offset`特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行`SQL`改写
    <br><span style="color:green">正例</span>：先快速定位需要获取的`id`段，然后再关联：
-    ```mysql
+    ```sql
     SELECT a.* FROM 表1 a, (SELECT id FROM 表1 WHERE 条件 LIMIT 100000, 20) b WHERE a.id = b.id
     ```
 8. 【推荐】 `SQL`性能优化的目标：至少要达到r`ange`级别，要求是`ref`级别，如果可以是`consts`最好
@@ -866,7 +866,7 @@
 注意`count(distinct col1, col2)`如果其中一列全为`NULL`，那么即使另一列有不同的值，也返回为0
 3. 【强制】当某一列的值全是`NULL`时，`count(col)`的返回结果为0，但`sum(col)`的返回结果为`NULL`，因此使用`sum()`时需注意`NPE`问题
    <br><span style="color:green">正例</span>：可以使用如下方式来避免`sum`的`NPE`问题：
-    ```mysql
+    ```sql
    SELECT IF(ISNULL(SUM(g)),0,SUM(g)) FROM table;
     ```
 4. 【强制】使用`ISNULL()`来判断是否为`NULL`值，说明：`NULL`与任何值的直接比较都为`NULL`
@@ -883,7 +883,7 @@
 9. 【推荐】`in`操作能避免则避免，若实在避免不了，需要仔细评估`in`后边的集合元素数量，控制在1000个之内
 10. 【参考】如果有全球化需要，所有的字符存储与表示，均以`utf-8`编码，注意字符统计函数的区别
     <br><span style="color:orange">说明</span>：
-    ```mysql
+    ```sql
     SELECT LENGTH("轻松工作"); # 返回为12
     SELECT CHARACTER_LENGTH("轻松工作"); # 返回为4
     ```
@@ -917,7 +917,7 @@
    <br><span style="color:orange">说明</span>：`resultClass="Hashtable"`，会置入字段名和属性值，但是值的类型不可控
 7. 【强制】更新数据表记录时，必须同时更新记录对应的`gmt_modified`字段值为当前时间
 8. 【推荐】不要写一个大而全的数据更新接口。传入为`POJO`类，不管是不是自己的目标更新字段，
-都进行`update table set c1=value1,c2=value2,c3=value3;`这是不对的。
+都进行`update table set c1 = value1, c2 = value2, c3 = value3;`这是不对的。
 执行SQL时，不要更新无改动的字段，一是易出错；二是效率低；三是增加`binlog`存储
 9. 【参考】`@Transactional`事务不要滥用。事务会影响数据库的QPS，另外使用事务的地方需要考虑各方面的回滚方案，
 包括缓存回滚、搜索引擎回滚、消息补偿、统计修正等
