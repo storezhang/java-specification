@@ -4,15 +4,24 @@
 从而达到编写更易维护的代码这个要求。
 本编码规范基于阿里巴巴编码规范而编写，中间加入了各种自己在工作中认为很好的工程化实践
 
+# 写在最前
+
+为了确保写出来的代码的可维护性，勿必做到以下几点
+- 不使用`IDE`提供的`格式化代码`这个功能，写出来的代码就比格式化的代码还要优雅
+- 在编辑器（不管是`IDE`还是其它编辑器）里开启显示空白字符，具体请参看各编辑器如何设置
+- 力求保持代码简单，现在`Java`界把很多事情搞得复杂化，比如`Controller`，已经在`controller`包里面还加`Controller`后缀，显得不伦不类，增加工作量不说还没有逻辑意义，已经在`controller`包里肯定就是`Controller`了，加后缀的意义在哪
+- 严禁中英文标点混用
+- 所有注释必须使用中文，禁止使用英文注释
+
 # 编程规约
 
 ## 命名风格
 
 1. 【强制】代码中的命名均不能以**下划线或美元符号**开始，也不能以**下划线或美元符号**结束
-   <br><span style="color:red">反例</span>：`_name / __name / $name / name_ / name$ / name__`
+   <br><span style="color:red">反例</span>：`_name` / `__name` / `$name` / `name_` / `name$` / `name__`
 2. 【强制】代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式
    <br><span style="color:orange">说明</span>：正确的英文拼写和语法可以让阅读者易于理解，避免歧义。注意，即使纯拼音命名方式也要避免采用
-   <br><span style="color:green">正例</span>：alibaba / taobao / youku / hangzhou 等国际通用的名称，可视同英文
+   <br><span style="color:green">正例</span>：`alibaba` / `chengdu` / `baidu` / `hangzhou`等国际通用的名称，可视同英文
    <br><span style="color:red">反例</span>：`DaZhePromotion[打折]` / `getPingfenByName()[评分]` / `int 某变量 = 3`
 3. 【强制】类名使用`UpperCamelCase`风格，但以下情形例外：`DO` / `BO` / `DTO` / `VO` / `AO` / `PO`等
    <br><span style="color:green">正例</span>：`MarcoPolo` / `UserDO` / `XmlService` / `TcpUdpDeal` / `TaPromotion`
@@ -77,7 +86,7 @@
 1. 【强制】不允许任何魔法值（即未经预先定义的常量）直接出现在代码中
    <br><span style="color:red">反例</span>：
     ```java
-    String key = "Id#taobao_" + tradeId;
+    String key = "Id#baidu_" + tradeId;
     cache.put(key, value); 
     ```
 2. 【强制】`long`或者`Long`初始赋值时，使用大写的`L`，不能是小写的`l`，小写容易跟数字`1`混淆，造成误解
@@ -94,7 +103,8 @@
    - 子工程内部共享常量：即在当前子工程的`constant`目录下
    - 包内共享常量：即在当前包下单独的`constant`目录下
    - 类内共享常量：直接在类内部`private static final`定义
-5. 【推荐】如果变量值仅在一个固定范围内变化用enum类型来定义。说明：如果存在名称之外的延伸属性使用enum类型，下面正例中的数字就是延伸信息，表示一年中的第几个季节。
+5. 【推荐】如果变量值仅在一个固定范围内变化用`enum`类型来定义。说明：如果存在名称之外的延伸属性使用`enum`类型，
+下面正例中的数字就是延伸信息，表示一年中的第几个季节
    <br><span style="color:green">正例</span>：
     ```java
     public enum SeasonEnum {
@@ -113,7 +123,7 @@
    - 左大括号前不换行
    - 左大括号后换行
    - 右大括号前换行
-   - 右大括号后还有else等代码则不换行；表示终止的右大括号后必须换行
+   - 右大括号后还有`else`等代码则不换行；表示终止的右大括号后必须换行
 2. 【强制】 左小括号和字符之间不出现空格；同样，右小括号和字符之间也不出现空格。详见第5条下方正例提示
    <br><span style="color:red">反例</span>：
     ```java
@@ -158,14 +168,38 @@
     - 方法调用的点符号与下文一起换行
     - 方法调用时，多个参数，需要换行时，在逗号后进行
     - 在括号前不要换行，见反例
+    - `return`前换行
+    - `IDE`为了可读性，会在调用时显示参数名字，让人误以为要换行，此时应该通过判断来确认是否需要换行
     <br><span style="color:green">正例</span>：
     ```java
-    StringBuffer sb = new StringBuffer();
-    // 超过120个字符的情况下，换行缩进4个空格，点号和方法名称一起换行
-    sb.append("zi").append("xin")...
-                   .append("huang")...
-                   .append("huang")...
-                   .append("huang");
+    // 如果方法签名过长，原则上每个参数一行，但是如果意义相近的参数可以作为一行，比如年、月、日等
+    public string test(
+        string username, string password,
+        int year, int month, int day,
+        int hour, int minute, int second,
+        StringBuilder sb
+    ) {
+        System.out.println("方法体")
+        // 逻辑A...
+
+        // 代码相近的逻辑之间，换行
+
+        // 逻辑B...
+
+        // return之前换行
+        return "test";
+    }
+
+    public static void main(string ...args) {
+        Test test = new Test();
+        // 方法调用时的换行
+        test.test( // 这儿需要换行
+            "username", "password", // 意义相近，可以不换行
+            2022, 10, 14, // 意义相近，可以不换行
+            16, 41, 34, // 意义相近，可以不换行
+            new StringBuilder() // 这儿需要换行
+        )
+    }
     ```
    <br><span style="color:red">反例</span>：
     ```java
@@ -242,9 +276,10 @@
 13. 【推荐】使用索引访问用`String`的`split`方法得到的数组时，需做最后一个分隔符后有无内容的检查，否则会有抛`IndexOutOfBoundsException`的风险
     <br><span style="color:orange">说明</span>：
     ```java
-    String str = "a,b,c,,";  
-    String[] ary = str.split(",");  
-    // 预期大于3，结果是3 System.out.println(ary.length);
+    String str = "a,b,c,,";
+    String[] ary = str.split(",");
+    // 预期大于3，结果是3
+    System.out.println(ary.length);
     ```
 14. 【推荐】当一个类有多个构造方法，或者多个同名方法，这些方法应该按顺序放置在一起，便于阅读，此条规则优先于第15条规则
 15. 【推荐】类内方法定义的顺序依次是：`公有方法或保护方法` > `私有方法` > `getter/setter方法`
@@ -330,7 +365,7 @@
     List list = Arrays.asList(str); 
     ```
    第一种情况：`list.add("yangguanbao");`运行时异常
-   <br>第二种情况：`str[0] = "gujin";`那么`list.get(0)`也会随之修改
+   <br>第二种情况：`str[0] = "jin";`那么`list.get(0)`也会随之修改
 6. 【强制】泛型通配符`<? extends T>`来接收返回的数据，此写法的泛型集合不能使用`add`方法，而`<? super T>`不能使用`get`方法，
 作为接口调用赋值时易出错
    <br><span style="color:orange">说明</span>：扩展说一下`PECS(Producer Extends Consumer Super)`原则：
@@ -390,7 +425,7 @@
     | Hashtable         | 不允许为null | 不允许为null | Dictionary  | 线程安全            |
     | ConcurrentHashMap | 不允许为null | 不允许为null | AbstractMap | 锁分段技术（JDK8:CAS） |
     | TreeMap           | 不允许为null | 允许为null  | AbstractMap | 线程不安全           |
-    | HashMap           | 允许为null  | 允许为null  | AbstractMap | 线程不安全           |
+    | HashMap           | 允许为null   | 允许为null  | AbstractMap | 线程不安全           |
 
     <span style="color:red">反例</span>：由于`HashMap`的干扰，很多人认为`ConcurrentHashMap`是可以置入`null`值，而事实上，
 存储`null`值时会抛出`NPE`异常
@@ -407,8 +442,8 @@
     ```java
     public class TimerTaskThread extends Thread {
         public TimerTaskThread() {
-            uper.setName("TimerTaskThread");
-            ...
+            super.setName("TimerTaskThread");
+            // ...
         }
     }
     ```
@@ -432,10 +467,10 @@
     ```
    <span style="color:orange">说明</span>：如果是JDK8的应用，可以使用`Instant`代替`Date`，`LocalDateTime`代替`Calendar`，
 `DateTimeFormatter`代替`SimpleDateFormat`，官方给出的解释：
-   > simple beautiful strong immutable thread-safe。
+   > simple beautiful strong immutable thread-safe
+
 6. 【强制】高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁
    <br><span style="color:orange">说明</span>：尽可能使加锁的代码块工作量尽可能小，避免在锁代码块中调用`RPC`方法
-
 7. 【强制】对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁
    <br><span style="color:orange">说明</span>：线程一需要对表A、B、C依次全部加锁后才可以进行更新操作，
 那么线程二的加锁顺序也必须是A、B、C，否则可能出现死锁
@@ -465,9 +500,10 @@
                 if (helper == null)
                 helper = new Helper();
             }
+
             return helper;
        }
-       // other methods and fields...
+       // 其它方法或者字段...
     }
     ```
 13. 【参考】`volatile`解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问题，但是如果多写，同样无法解决线程安全问题。
@@ -488,7 +524,7 @@
 在一个`switch`块内，都必须包含一个`default`语句并且放在最后，即使空代码
 2. 【强制】在`if`/`else`/`for`/`while`/`do`语句中必须使用大括号。即使只有一行代码，也必须避免采用单行的编码方式：
     ```java
-   if (condition) statements;
+    if (condition) statements;
     ```
 3. 【强制】在高并发场景中，避免使用”等于”判断作为中断或退出的条件
    <br><span style="color:orange">说明</span>：如果并发控制没有处理好，容易产生等值判断被“击穿”的情况，使用大于或小于的区间判断条件来代替
@@ -497,7 +533,7 @@
 4. 【推荐】表达异常的分支时，少用`if-else`方式，这种方式可以改写成：
     ```java
     if (condition) {
-    ...
+        ...
         return obj;
     }
     // 接着写else的业务逻辑代码;
@@ -507,16 +543,16 @@
     ```java
     public void today() {
         if (isBusy()) {
-            System.out.println(“change time.”);
+            System.out.println("更改时间...");
             return;
         }
 
         if (isFree()) {
-            System.out.println(“go to travel.”);
+            System.out.println("去玩吧^_^");
             return;
         }
 
-        System.out.println(“stay at home to learn Alibaba Java Coding Guidelines.”);
+        System.out.println("操，呆在家吧！");
         // ...
 
         return;
@@ -528,15 +564,16 @@
    <br><span style="color:green">
    正例</span>：
     ```java
-    // 伪代码如下 final boolean existed = (file.open(fileName, "w") != null) && (...) || (...); 
+    // 伪代码如下
+    final boolean existed = (file.open(fileName, "w") != null) && (...) || (...);
     if (existed) {
-       ...
+       // ...
     }
     ```
    <span style="color:red">反例</span>：
     ```java
     if ((file.open(fileName, "w") != null) && (...) || (...)) {
-      ...
+      // ...
     }
     ```
 6. 【推荐】循环体中的语句要考量性能，以下操作尽量移至循环体外处理，如定义对象、变量、获取数据库连接，
@@ -612,7 +649,7 @@
 5. 【强制】有`try`块放到了事务代码中，`catch`异常后，如果需要回滚事务，一定要注意手动回滚事务
 6. 【强制】`finally`块必须对资源对象、流对象进行关闭，有异常也要做`try-catch`
    <br><span style="color:orange">说明</span>：如果`JDK7`及以上，可以使用`try-with-resources`方式
-7. 【强制】不要在f`inally`块中使用`return`
+7. 【强制】不要在`finally`块中使用`return`
    <br><span style="color:orange">说明</span>：`finally`块中的`return`返回后方法结束执行，不会再执行`try`块中的`return`语句
 8. 【强制】捕获异常与抛异常，必须是完全匹配，或者捕获异常是抛异常的父类
    <br><span style="color:orange">说明</span>：如果预期对方抛的是绣球，实际接到的是铅球，就会产生意外情况
@@ -622,7 +659,7 @@
 对调用者来说，也并非高枕无忧，必须考虑到远程调用失败、序列化失败、运行时异常等场景返回`null`的情况
 10. 【推荐】防止`NPE`，是程序员的基本修养，注意`NPE`产生的场景：
     - 返回类型为基本数据类型，`return`包装数据类型的对象时，自动拆箱有可能产生`NPE`
-      <span style="color:red">反例</span>：`public int f() { return Integer对象}`，如果为`null`，自动解箱抛`NPE`
+      <span style="color:red">反例</span>：`public int f() { return Integer对象 }`，如果为`null`，自动解箱抛`NPE`
     - 数据库的查询结果可能为`null`
     - 集合里的元素即使`isNotEmpty`，取出的数据元素也可能为`null`
     - 远程调用返回对象时，一律要求进行空指针判断，防止`NPE`
@@ -658,7 +695,8 @@
     - logType：日志类型，推荐分类有stats/monitor/visit等
     - logName：日志描述
    这种命名的好处：通过文件名就可知道日志文件属于什么应用，什么类型，什么目的，也有利于归类查找
-   <br><span style="color:green">正例</span>：mppserver应用中单独监控时区转换异常，如：mppserver_monitor_timeZoneConvert.log
+   <br><span style="color:green">正例</span>：mpp
+   应用中单独监控时区转换异常，如：push_monitor_timeZoneConvert.log
    <br><span style="color:orange">说明</span>：推荐对日志进行分类，如将错误日志和业务日志分开存放，便于开发人员查看，
 也便于通过日志对系统进行及时监控
 4. 【强制】对`trace`/`debug`/`info`级别的日志输出，必须使用条件输出形式或者使用占位符的方式
@@ -668,13 +706,13 @@
     ```java
     （条件）
     if (logger.isDebugEnabled()) {
-        logger.debug("Processing trade with id: " + id + " and symbol: " + symbol);
+        logger.debug("按编号进行处理：" + id + " 变量是：" + symbol);
     }
     ```
    <br><span style="color:green">正例</span>：
     ```java
     （占位符）
-    logger.debug("Processing trade with id: {} and symbol : {} ", id, symbol);
+    logger.debug("按编号进行处理：{}，变量是：{}", id, symbol);
     ```
 5. 【强制】避免重复打印日志，浪费磁盘空间，务必在`log4j.xml`中设置`<logger name="com.taobao.dubbo.config" additivity="false">`
 6. 【强制】异常信息应该包括两类信息：案发现场信息和异常堆栈信息。如果不处理，那么通过关键字`throws`往上抛出
@@ -692,17 +730,17 @@
 ## 其它
 
 1. 【强制】在使用正则表达式时，利用好其预编译功能，可以有效加快正则匹配速度
-   <br><span style="color:orange">说明</span>：不要在方法体内定义：`Pattern pattern = Pattern.compile(规则);`
+   <br><span style="color:orange">说明</span>：不要在方法体内定义：`Pattern pattern = Pattern.compile("规则");`
 2. 【强制】velocity调用POJO类的属性时，建议直接使用属性名取值即可，模板引擎会自动按规范调用`POJO`的`getXxx()`，
 如果是`boolean`基本数据类型变量（`boolean`命名不需要加`is`前缀），会自动调用`isXxx()`方法
    <br><span style="color:orange">说明</span>：注意如果是`Boolean`包装类对象，优先调用`getXxx()`的方法
 3. 【强制】后台输送给页面的变量必须加`$!{var}`
    <br><span style="color:orange">说明</span>：如果`var=null`或者不存在，那么`${var}`会直接显示在页面上
-4. 【强制】注意`Math.random()`这个方法返回是`double`类型，注意取值的范围`0≤x<1`（能够取到零值，注意除零异常），
+4. 【强制】注意`Math.random()`这个方法返回是`double`类型，注意取值的范围`0 ≤ x < 1`（能够取到零值，注意除零异常），
 如果想获取整数类型的随机数，不要将x放大10的若干倍然后取整，直接使用`Random`对象的`nextInt`或者`nextLong`方法
 5. 【强制】获取当前毫秒数使用`System.currentTimeMillis()`而不是`new Date().getTime()`
    <br><span style="color:orange">说明</span>：如果想获取更加精确的纳秒级时间值，使用`System.nanoTime()`的方式。
-在JDK8中，针对统计时间等场景，推荐使用`Instant`类
+在`JDK8`中，针对统计时间等场景，推荐使用`Instant`类
 6. 【推荐】不要在视图模板中加入任何复杂的逻辑
    <br><span style="color:orange">说明</span>：根据`MVC`理论，视图的职责是展示，不要抢模型和控制器的活
 7. 【推荐】任何数据结构的构造或初始化，都应指定大小，避免数据结构无限增长吃光内存
@@ -722,8 +760,8 @@
 因为无法进行预发布，所以字段名称需要慎重考虑
    <br><span style="color:orange">说明</span>：`MySQL`在`Windows`下不区分大小写，但在`Linux`下默认是区分大小写。
 因此，数据库名、表名、字段名，都不允许出现任何大写字母，避免节外生枝
-   <br><span style="color:green">正例</span>：`aliyun_admin`，`rdc_config`，`level3_name`
-   <br><span style="color:red">反例</span>：`AliyunAdmin`，`rdcConfig`，`level_3_name`
+   <br><span style="color:green">正例</span>：`baidu_admin`，`rdc_config`，`level3_name`
+   <br><span style="color:red">反例</span>：`BaiduAdmin`，`rdcConfig`，`level_3_name`
 3. 【强制】表名不使用复数名词
    <br><span style="color:orange">说明</span>：表名应该仅仅表示表里面的实体内容，不应该表示实体数量，`DO`类名也是单数形式，符合表达习惯
 4. 【强制】禁用保留字，如`desc`、`range`、`match`、`delayed`等，请参考`MySQL`官方保留字
@@ -739,7 +777,7 @@
    <br><span style="color:orange">说明</span>：其中`id`必为主键，类型为`unsigned bigint`、单表时自增、步长为`1`。
 `gmt_create`，`gmt_modified`的类型均为`datetime`类型，前者现在时表示主动创建，后者过去分词表示被动更新
 10. 【推荐】表的命名最好是加上“业务名称_表的作用”
-    <br><span style="color:green">正例</span>：`alipay_task` / `force_project` / `trade_config`
+    <br><span style="color:green">正例</span>：`pay_task` / `force_project` / `trade_config`
 11. 【推荐】库名与应用名称尽量一致
 12. 【推荐】如果修改字段含义或对字段表示的状态追加时，需要及时更新字段注释
 13. 【推荐】字段允许适当冗余，以提高查询性能，但必须考虑数据一致。冗余字段应遵循：
@@ -752,12 +790,12 @@
 15. 【参考】合适的字符存储长度，不但节约数据库表空间、节约索引存储，更重要的是提升检索速度
     <br><span style="color:green">正例</span>：如下表，其中无符号值可以避免误存负数，且扩大了表示范围
 
-    | 对象     | 年龄区间  | 类型              | 字节 |
-    | -------- | :-------- | :---------------- | :--- |
-    | 人       | 150岁之内 | unsigned tinyint  | 1    |
-    | 龟       | 数百岁    | unsigned smallint | 2    |
-    | 恐龙化石 | 数千万岁  | unsigned int      | 4    |
-    | 太阳     | 约50亿年  | unsigned bigint   | 8    |
+    | 对象     | 年龄区间    | 类型              | 字节 |
+    |---------| :-------- | :---------------- | :--- |
+    | 人       | 150岁之内  | unsigned tinyint  | 1    |
+    | 龟       | 数百岁     | unsigned smallint | 2    |
+    | 恐龙化石 | 数千万岁    | unsigned int      | 4    |
+    | 太阳     | 约50亿年   | unsigned bigint   | 8    |
 
 ## 索引规约
 
@@ -785,7 +823,7 @@
 返回`N`行，那当`offset`特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行`SQL`改写
    <br><span style="color:green">正例</span>：先快速定位需要获取的`id`段，然后再关联：
     ```mysql
-   SELECT a.* FROM 表1 a, (SELECT id FROM 表1 WHERE 条件 LIMIT 100000,20 ) b WHERE a.id = b.id
+    SELECT a.* FROM 表1 a, (SELECT id FROM 表1 WHERE 条件 LIMIT 100000, 20) b WHERE a.id = b.id
     ```
 8. 【推荐】 `SQL`性能优化的目标：至少要达到r`ange`级别，要求是`ref`级别，如果可以是`consts`最好
    <br><span style="color:orange">说明</span>：
@@ -865,7 +903,7 @@
 7. 【强制】更新数据表记录时，必须同时更新记录对应的`gmt_modified`字段值为当前时间
 8. 【推荐】不要写一个大而全的数据更新接口。传入为`POJO`类，不管是不是自己的目标更新字段，
 都进行`update table set c1=value1,c2=value2,c3=value3;`这是不对的。
-执行SQL时，不要更新无改动的字段，一是易出错；二是效率低；三是增加binlog存储
+执行SQL时，不要更新无改动的字段，一是易出错；二是效率低；三是增加`binlog`存储
 9. 【参考】`@Transactional`事务不要滥用。事务会影响数据库的QPS，另外使用事务的地方需要考虑各方面的回滚方案，
 包括缓存回滚、搜索引擎回滚、消息补偿、统计修正等
 10. 【参考】`<isEqual>`中的`compareValue`是与属性值对比的常量，一般是数字，表示相等时带上此条件；
