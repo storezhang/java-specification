@@ -338,11 +338,11 @@
 7. 【强制】不要在`foreach`循环里进行元素的`remove`/`add`操作。`remove`元素请使用`Iterator`方式，如果并发操作，需要对`Iterator`对象加锁
    <br><span style="color:green">正例</span>：
     ```java
-    Iterator<String> iterator = list.iterator();  while (iterator.hasNext()) {          
+    Iterator<String> iterator = list.iterator();  while (iterator.hasNext()) {
         String item = iterator.next();
         if (删除元素的条件) {
             iterator.remove();
-        }      
+        }
     }
     ```
    <span style="color:red">反例</span>：
