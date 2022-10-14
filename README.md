@@ -40,22 +40,23 @@
    <br><span style="color:red">反例</span>：定义为基本数据类型`Boolean isDeleted`的属性，
 它的方法也是`isDeleted()`，RPC框架在反向解析的时候，**误以为**对应的属性名称是`deleted`，导致属性获取不到，进而抛出异常
 9. 【强制】包名统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词。包名统一使用单数形式，但是类名如果有复数含义，类名可以使用复数形式
-   <br><span style="color:green">正例</span>：应用工具类包名为com.alibaba.ai.util、类名为MessageUtils（此规则参考spring的框架结构）
+   <br><span style="color:green">正例</span>：应用工具类包名为`com.alibaba.ai.util`、类名为`MessageUtils`（此规则参考`spring`的框架结构）
 10. 【强制】杜绝完全不规范的缩写，避免望文不知义
     <br><span style="color:red">反例</span>：AbstractClass“缩写”命名成AbsClass；condition“缩写”命名成
-    condi，此类随意缩写严重降低了代码的可阅读性
+condi，此类随意缩写严重降低了代码的可阅读性
 11. 【推荐】为了达到代码自解释的目标，任何自定义编程元素在命名时，使用尽量完整的单词组合来表达其意
-    <br><span style="color:green">正例</span>：从远程仓库拉取代码的类命名为PullCodeFromRemoteRepository
-    <br><span style="color:red">反例</span>：变量int a; 的随意命名方式
+    <br><span style="color:green">正例</span>：从远程仓库拉取代码的类命名为`PullCodeFromRemoteRepository`
+    <br><span style="color:red">反例</span>：变量`int a;`的随意命名方式
 12. 【推荐】如果模块、接口、类、方法使用了设计模式，在命名时体现出具体模式
     <br><span style="color:orange">说明</span>：将设计模式体现在名字中，有利于阅读者快速理解架构设计理念
     <br><span style="color:green">正例</span>：
+
     ```java
     public class OrderFactory;
     public class LoginProxy;
     public class ResourceObserver;
     ```
-13. 【推荐】接口类中的方法和属性不要加任何修饰符号（public也不要加），保持代码的简洁性，并加上有效的Javadoc注释。
+13. 【推荐】接口类中的方法和属性不要加任何修饰符号（public也不要加），保持代码的简洁性，并加上有效的`Javadoc`注释。
     尽量不要在接口里定义变量，如果一定要定义变量，肯定是与接口方法相关，并且是整个应用的基础常量
     <br><span style="color:green">正例</span>：接口方法签名`void f();`，接口基础常量`String COMPANY = "alibaba";`
     <br><span style="color:red">反例</span>：接口方法定义`public abstract void f();`
@@ -68,7 +69,7 @@
     <br><span style="color:orange">说明</span>：枚举其实就是特殊的常量类，且构造方法被默认强制是私有
     <br><span style="color:green">正例</span>：枚举名字为`ProcessStatusEnum`的成员名称：`SUCCESS` / `UNKNOWN_REASON`
 17. 【参考】各层命名规约：
-    - Service/DAO层方法命名规约
+    - `Service` / `DAO`层方法命名规约
         - 获取单个对象的方法用`get`作前缀
         - 获取多个对象的方法用`list`作前缀
         - 获取统计值的方法用`count`作前缀
@@ -85,6 +86,7 @@
 
 1. 【强制】不允许任何魔法值（即未经预先定义的常量）直接出现在代码中
    <br><span style="color:red">反例</span>：
+
     ```java
     String key = "Id#baidu_" + tradeId;
     cache.put(key, value); 
@@ -106,6 +108,7 @@
 5. 【推荐】如果变量值仅在一个固定范围内变化用`enum`类型来定义。说明：如果存在名称之外的延伸属性使用`enum`类型，
 下面正例中的数字就是延伸信息，表示一年中的第几个季节
    <br><span style="color:green">正例</span>：
+
     ```java
     public enum SeasonEnum {
         SPRING(1), SUMMER(2), AUTUMN(3), WINTER(4);
@@ -126,6 +129,7 @@
    - 右大括号后还有`else`等代码则不换行；表示终止的右大括号后必须换行
 2. 【强制】 左小括号和字符之间不出现空格；同样，右小括号和字符之间也不出现空格。详见第5条下方正例提示
    <br><span style="color:red">反例</span>：
+
     ```java
     if (空格a == b空格)
     ```
@@ -136,6 +140,7 @@
    <br><span style="color:orange">说明</span>：如果使用`tab`缩进，必须设置`1个tab为4个空格`。`IDEA`设置`tab为4个空格`时，
 请勿勾选`Use tab character`；而在`Eclipse`中，必须勾选`insert spaces for tabs`
    <br><span style="color:green">正例</span>：
+
     ```java
     public static void main(String[] args) {
         // 缩进4个空格
@@ -144,7 +149,7 @@
         int flag = 0;
         // 关键词if与括号之间必须有一个空格，括号内的f与左括号，0与右括号不需要空格
         if (flag == 0) {
-            System.out.println(say);
+            System.out.println("say");
         }
         // 左大括号前加空格且不换行；左大括号后换行
         if (flag == 1) {
@@ -156,13 +161,14 @@
         }
     }
     ```
-6. 【强制】注释的双斜线与注释内容之间有且仅有一个空格
+1. 【强制】注释的双斜线与注释内容之间有且仅有一个空格
    <br><span style="color:green">正例</span>：
+
     ```java
     // 这是示例注释，请注意在双斜线之后有一个空格
     String ygb = new String(); 
     ```
-7. 【强制】单行字符数限制不超过120个，超出需要换行，换行时遵循如下原则：
+2. 【强制】单行字符数限制不超过120个，超出需要换行，换行时遵循如下原则：
     - 第二行相对第一行缩进4个空格，从第三行开始，不再继续缩进，参考示例
     - 运算符与下文一起换行
     - 方法调用的点符号与下文一起换行
@@ -171,6 +177,7 @@
     - `return`前换行
     - `IDE`为了可读性，会在调用时显示参数名字，让人误以为要换行，此时应该通过判断来确认是否需要换行
     <br><span style="color:green">正例</span>：
+
     ```java
     // 如果方法签名过长，原则上每个参数一行，但是如果意义相近的参数可以作为一行，比如年、月、日等
     public string test(
@@ -190,7 +197,7 @@
         return "test";
     }
 
-    public static void main(string ...args) {
+    public static void main(string... args) {
         Test test = new Test();
         // 方法调用时的换行
         test.test( // 这儿需要换行
@@ -202,6 +209,7 @@
     }
     ```
    <br><span style="color:red">反例</span>：
+
     ```java
     StringBuffer sb = new StringBuffer();
     // 超过120个字符的情况下，不要在括号前换行
@@ -209,14 +217,16 @@
     // 参数很多的方法调用可能超过120个字符，不要在逗号前换行
     method(args1, args2, args3, ..., argsX);
     ```
-8. 【强制】方法参数在定义和传入时，多个参数逗号后边必须加空格
+3. 【强制】方法参数在定义和传入时，多个参数逗号后边必须加空格
    <br><span style="color:green">正例</span>：下例中实参的"a",后边必须要有一个空格
+
     ```java
-    method("a", "b", "c"); 
+    method("a", "b", "c");
     ```
-9. 【强制】`IDE`的`text file encoding`设置为`UTF-8`，`IDE`中文件的换行符使用`Unix`格式，不要使用`Windows`格式
-10. 【推荐】没有必要增加若干空格来使某一行的字符与上一行对应位置的字符对齐
+4. 【强制】`IDE`的`text file encoding`设置为`UTF-8`，`IDE`中文件的换行符使用`Unix`格式，不要使用`Windows`格式
+5.  【推荐】没有必要增加若干空格来使某一行的字符与上一行对应位置的字符对齐
     <br><span style="color:green">正例</span>：
+
     ```java
     int a = 3;
     long b = 4L;
@@ -224,7 +234,7 @@
     StringBuffer sb = new StringBuffer();
     ```
     <span style="color:orange">说明</span>：增加sb这个变量，如果需要对齐，则给a、b、c都要增加几个空格，在变量比较多的情况下，是非常累赘的事情
-11. 【推荐】不同逻辑、不同语义、不同业务的代码之间插入一个空行分隔开来以提升可读性
+6.  【推荐】不同逻辑、不同语义、不同业务的代码之间插入一个空行分隔开来以提升可读性
     <br><span style="color:orange">说明</span>：没有必要插入**多个空行**进行隔开
 
 ## OOP规约
@@ -236,8 +246,11 @@
 3. 【强制】相同参数类型，相同业务含义，才可以使用`Java`的可变参数，避免使用`Object`
    <br><span style="color:orange">说明</span>：可变参数必须放置在参数列表的最后（提倡同学们尽量不用可变参数编程）
    <br><span style="color:green">正例</span>：
+
     ```java
-    public User getUsers(String type, Integer... ids) { /*...*/ }
+    public User getUsers(String type, Integer... ids) {
+        // ...
+    }
     ```
 4. 【强制】外部正在调用或者`二方库`依赖的接口，不允许修改方法签名，避免对接口调用方产生影响。接口过时必须加`@Deprecated`注解，
 并清晰地说明采用的新接口或者新服务是什么
@@ -248,22 +261,22 @@
 6. 【强制】Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用`equals`
    <br><span style="color:green">正例</span>：`"test".equals(object);`
    <br><span style="color:red">反例</span>：`object.equals("test");`
-   <br><span style="color:orange">说明</span>：推荐使用`java.util.Objects#equals`（JDK7引入的工具类）
+   <br><span style="color:orange">说明</span>：推荐使用`java.util.Objects#equals`（`JDK7`引入的工具类）
 7. 【强制】所有的相同类型的包装类对象之间值的比较，全部使用`equals`方法比较
-   <br><span style="color:orange">说明</span>：`对于Integer var = ?`，在-128至127范围内的赋值，
+   <br><span style="color:orange">说明</span>：`对于Integer var = ?`，在`-128`至`127`范围内的赋值，
 `Integer`对象是在`IntegerCache.cache`产生，会复用已有对象，这个区间内的`Integer`值可以直接使用`==`进行判断，但是这个区间之外的所有数据，
 都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用`equals`方法进行判断
 8. 关于基本数据类型与包装数据类型的使用标准如下：
-    - 【强制】所有的POJO类属性必须使用包装数据类型
-    - 【强制】RPC方法的返回值和参数必须使用包装数据类型
+    - 【强制】所有的`POJO`类属性必须使用包装数据类型
+    - 【强制】`RPC`方法的返回值和参数必须使用包装数据类型
     - 【推荐】所有的局部变量使用基本数据类型
-       <br><span style="color:orange">说明</span>：`POJO`类属性没有初值是提醒使用者在需要使用时，必须自己显式地进行赋值，
+    <br><span style="color:orange">说明</span>：`POJO`类属性没有初值是提醒使用者在需要使用时，必须自己显式地进行赋值，
 任何`NPE`问题，或者入库检查，都由使用者来保证
        <br><span style="color:green">正例</span>：数据库的查询结果可能是`null`，因为自动拆箱，用基本数据类型接收有`NPE`风险
        <br><span style="color:red">反例</span>：比如显示成交总额涨跌情况，即正负`x%`，`x`为基本数据类型，调用的`RPC`服务，
 调用不成功时，返回的是默认值，页面显示为`0%`，这是不合理的，应该显示成中划线。
 所以包装数据类型的`null`值，能够表示额外的信息，如：远程调用失败，异常退出
-9. 【强制】定义`DO` / `DTO` / `VO`等`POJO`类时，不要设定任何属性**默认值**
+1. 【强制】定义`DO` / `DTO` / `VO`等`POJO`类时，不要设定任何属性**默认值**
    <br><span style="color:red">反例</span>：`POJO`类的`gmtCreate`默认值为`new Date();`，但是这个属性在数据提取时并没有置入具体值，
 在更新其它字段时又附带更新了此字段，导致创建时间被修改成当前时间
 10. 【强制】序列化类新增属性时，请不要修改`serialVersionUID`字段，避免反序列失败；如果完全不兼容升级，避免反序列化混乱，
@@ -275,6 +288,7 @@
     <br><span style="color:orange">说明</span>：在方法执行抛出异常时，可以直接调用`POJO`的`toString()`方法打印其属性值，便于排查问题
 13. 【推荐】使用索引访问用`String`的`split`方法得到的数组时，需做最后一个分隔符后有无内容的检查，否则会有抛`IndexOutOfBoundsException`的风险
     <br><span style="color:orange">说明</span>：
+
     ```java
     String str = "a,b,c,,";
     String[] ary = str.split(",");
@@ -288,6 +302,7 @@
 因为承载的信息价值较低，所有`Service`和`DAO`的`getter` / `setter`方法放在类体最后
 16. 【推荐】setter方法中，参数名称与类成员变量名称一致，`this.成员名 = 参数名`。在`getter`/`setter`方法中，不要增加业务逻辑，增加排查问题的难度。
     <br><span style="color:red">反例</span>：
+
     ```java
     public Integer getData() {
         if (condition) {
@@ -301,21 +316,22 @@
     <br><span style="color:orange">说明</span>：反编译出的字节码文件显示每次循环都会`new`出一个`StringBuilder`对象，
 然后进行`append`操作，最后通过toString方法返回String对象，造成内存资源浪
     <br><span style="color:red">反例</span>：
+
     ```java
     String str = "start";
     for (int i = 0; i < 100; i++) {
         str = str + "hello";
     }
     ```
-18. 【推荐】`final`可以声明类、成员变量、方法、以及本地变量，下列情况使用`final`关键字：
+1.  【推荐】`final`可以声明类、成员变量、方法、以及本地变量，下列情况使用`final`关键字：
     - 不允许被继承的类，如：`String`类
     - 不允许修改引用的域对象，如：`POJO`类的域变量
     - 不允许被重写的方法，如：`POJO`类的`setter`方法
     - 不允许运行过程中重新赋值的局部变量
     - 避免上下文重复使用一个变量，使用`final`描述可以强制重新定义一个变量，方便更好地进行重构
-19. 【推荐】慎用`Object`的`clone`方法来拷贝对象
+2.  【推荐】慎用`Object`的`clone`方法来拷贝对象
     <br><span style="color:orange">说明</span>：对象的`clone`方法默认是浅拷贝，若想实现深拷贝需要重写`clone`方法实现属性对象的拷贝
-20. 【推荐】类成员与方法访问控制从严：
+3.  【推荐】类成员与方法访问控制从严：
     - 如果不允许外部直接通过`new`来创建对象，那么构造方法必须是`private`
     - 工具类不允许有`public`或`default`构造方法
     - 类非`static`成员变量并且与子类共享，必须是`protected`
@@ -331,12 +347,12 @@
 ## 集合处理
 
 1. 【强制】关于`hashCode`和`equals`的处理，遵循如下规则：
-    - 只要重写`equals`，就必须重写`hashCode`
-    - 因为`Set`存储的是不重复的对象，依据`hashCode`和`equals`进行判断，所以`Set`存储的对象必须重写这两个方法
-    - 如果自定义对象作为`Map`的键，那么必须重写`hashCode`和`equals`
+   - 只要重写`equals`，就必须重写`hashCode`
+   - 因为`Set`存储的是不重复的对象，依据`hashCode`和`equals`进行判断，所以`Set`存储的对象必须重写这两个方法
+   - 如果自定义对象作为`Map`的键，那么必须重写`hashCode`和`equals`
    <br><span style="color:orange">说明</span>：`String`重写了`hashCode`和`equals`方法，
 所以我们可以非常愉快地使用`String`对象作为`key`来使用
-2. 【强制】`ArrayList`的`subList`结果不可强转成`ArrayList`，否则会抛出`ClassCastException`异常，
+1. 【强制】`ArrayList`的`subList`结果不可强转成`ArrayList`，否则会抛出`ClassCastException`异常，
 即`java.util.RandomAccessSubList cannot be cast to java.util.ArrayList`
    <br><span style="color:orange">说明</span>：`subList`返回的是`ArrayList`的内部类`SubList`，并不是`ArrayList`，
 而是`ArrayList`的一个视图，对于`SubList`子列表的所有操作最终会反映到原列表上
@@ -347,6 +363,7 @@
 `toArray`方法内部将重新分配内存空间，并返回新数组地址；如果数组元素个数大于实际所需，下标为`list.size()`的数组元素将被置为`null`，
 其它数组元素保持原值，因此最好将方法入参数组大小定义与集合元素个数一致
    <br><span style="color:green">正例</span>：
+
     ```java
     List<String> list = new ArrayList<String>(2);
     list.add("guan");
@@ -356,13 +373,14 @@
     ```
    <span style="color:red">反例</span>：直接使用`toArray`无参方法存在问题，此方法返回值只能是`Object[]`类，
 若强转其它类型数组将出现`ClassCastException`错误
-5. 【强制】使用工具类`Arrays.asList()`把数组转换成集合时，不能使用其修改集合相关的方法，
-它的`add`/`remove`/`clear`方法会抛出`UnsupportedOperationException`异常
+1. 【强制】使用工具类`Arrays.asList()`把数组转换成集合时，不能使用其修改集合相关的方法，
+它的`add` / `remove` / `clear`方法会抛出`UnsupportedOperationException`异常
    <br><span style="color:orange">说明</span>：`asList`的返回对象是一个`Arrays`内部类，并没有实现集合的修改方法。
 `Arrays.asList`体现的是适配器模式，只是转换接口，后台的数据仍是数组
+
     ```java
     String[] str = new String[] { "you", "wu" };
-    List list = Arrays.asList(str); 
+    List list = Arrays.asList(str);
     ```
    第一种情况：`list.add("yangguanbao");`运行时异常
    <br>第二种情况：`str[0] = "jin";`那么`list.get(0)`也会随之修改
@@ -372,8 +390,10 @@
 第一、频繁往外读取内容的，适合用`<? extends T>`；第二、经常往里插入的，适合用`<? super T>`
 7. 【强制】不要在`foreach`循环里进行元素的`remove`/`add`操作。`remove`元素请使用`Iterator`方式，如果并发操作，需要对`Iterator`对象加锁
    <br><span style="color:green">正例</span>：
+
     ```java
-    Iterator<String> iterator = list.iterator();  while (iterator.hasNext()) {
+    Iterator<String> iterator = list.iterator();
+    while (iterator.hasNext()) {
         String item = iterator.next();
         if (删除元素的条件) {
             iterator.remove();
@@ -381,6 +401,7 @@
     }
     ```
    <span style="color:red">反例</span>：
+
     ```java
     List<String> list = new ArrayList<String>();
     list.add("1");
@@ -398,6 +419,7 @@
    - x>y，y>z，则x>z
    - x=y，则x，z比较结果和y，z比较结果相同
    <br><span style="color:red">反例</span>：下例中没有处理相等的情况，实际使用中可能会出现异常：
+
     ```java
     new Comparator<Student>() {
         @Override
@@ -421,7 +443,7 @@
 11. 【推荐】高度注意`Map`类集合`KV`能不能存储`null`值的情况，如下表格：
 
     | 集合类               | Key      | Value    | Super       | 说明              |
-    |-------------------|----------|----------|-------------|--------------------|
+    |---------------------|----------|----------|-------------|--------------------|
     | Hashtable         | 不允许为null | 不允许为null | Dictionary  | 线程安全            |
     | ConcurrentHashMap | 不允许为null | 不允许为null | AbstractMap | 锁分段技术（JDK8:CAS） |
     | TreeMap           | 不允许为null | 允许为null  | AbstractMap | 线程不安全           |
@@ -440,6 +462,7 @@
    <br><span style="color:orange">说明</span>：资源驱动类、工具类、单例工厂类都需要注意
 2. 【强制】创建线程或线程池时请指定有意义的线程名称，方便出错时回溯
    <br><span style="color:green">正例</span>：
+
     ```java
     public class TimerTaskThread extends Thread {
         public TimerTaskThread() {
@@ -458,6 +481,7 @@
     - `CachedThreadPool`和`ScheduledThreadPool`：允许的创建线程数量为`Integer.MAX_VALUE`，可能会创建大量的线程，从而导致`OOM`
 5. 【强制】`SimpleDateFormat`是线程不安全的类，一般不要定义为`static`变量，如果定义为`static`，必须加锁，或者使用`DateUtils`工具类
    <br><span style="color:green">正例</span>：注意线程安全，使用`DateUtils`。亦推荐如下处理：
+
     ```java
     private static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>() {
         Override
@@ -470,9 +494,9 @@
 `DateTimeFormatter`代替`SimpleDateFormat`，官方给出的解释：
    > simple beautiful strong immutable thread-safe
 
-6. 【强制】高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁
+1. 【强制】高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁
    <br><span style="color:orange">说明</span>：尽可能使加锁的代码块工作量尽可能小，避免在锁代码块中调用`RPC`方法
-7. 【强制】对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁
+2. 【强制】对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁
    <br><span style="color:orange">说明</span>：线程一需要对表A、B、C依次全部加锁后才可以进行更新操作，
 那么线程二的加锁顺序也必须是A、B、C，否则可能出现死锁
 8. 【强制】并发修改同一记录时，避免更新丢失，需要加锁。要么在应用层加锁，要么在缓存加锁，要么在数据库层使用乐观锁，使用version作为更新依据
@@ -492,6 +516,7 @@
 可参考`The "Double-Checked Locking is Broken" Declaration`，推荐解决方案中较为简单一种（适用于`JDK5`及以上版本），
 将目标属性声明为`volatile`型
     <br><span style="color:red">反例</span>：
+
     ```java
     class Singleton { 
         private Helper helper = null;
@@ -507,7 +532,7 @@
        // 其它方法或者字段...
     }
     ```
-13. 【参考】`volatile`解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问题，但是如果多写，同样无法解决线程安全问题。
+1.  【参考】`volatile`解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问题，但是如果多写，同样无法解决线程安全问题。
 如果是`count++`操作，使用如下类实现：
     ```java
     AtomicInteger count = new AtomicInteger();
@@ -564,8 +589,8 @@
 5. 【推荐】除常用方法（如`getXxx`/`isXxx`）等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性
    <br><span style="color:orange">说明</span>：很多`if`语句内的逻辑相当复杂，阅读者需要分析条件表达式的最终结果，
 才能明确什么样的条件执行什么样的语句，那么，如果阅读者分析逻辑表达式错误呢？
-   <br><span style="color:green">
-   正例</span>：
+   <br><span style="color:green">正例</span>：
+
     ```java
     // 伪代码如下
     final boolean existed = (file.open(fileName, "w") != null) && (...) || (...);
@@ -574,12 +599,13 @@
     }
     ```
    <span style="color:red">反例</span>：
+
     ```java
     if ((file.open(fileName, "w") != null) && (...) || (...)) {
       // ...
     }
     ```
-6. 【推荐】循环体中的语句要考量性能，以下操作尽量移至循环体外处理，如定义对象、变量、获取数据库连接，
+1. 【推荐】循环体中的语句要考量性能，以下操作尽量移至循环体外处理，如定义对象、变量、获取数据库连接，
 进行不必要的`try-catch`操作（这个`try-catch`是否可以移至循环体外）
 7. 【推荐】避免采用取反逻辑运算符
    <br><span style="color:orange">说明</span>：取反逻辑不利于快速理解，并且取反逻辑写法必然存在对应的正向逻辑写法。
@@ -639,6 +665,7 @@
    <span style="color:orange">说明</span>：无法通过预检查的异常除外，比如，在解析字符串形式的数字时，
 不得不通过`catch NumberFormatException`来实现
    <br><span style="color:green">正例</span>：
+
     ```java
     if (obj != null) {
         // ...
@@ -652,9 +679,9 @@
         // ...
     }
     ```
-2. 【强制】异常不要用来做流程控制，条件控制
+1. 【强制】异常不要用来做流程控制，条件控制
    <br><span style="color:orange">说明</span>：异常设计的初衷是解决程序运行中的各种意外情况，且异常地处理效率比条件判断方式要低很多
-3. 【强制】`catch`时分清稳定代码和非稳定代码，稳定代码指无论如何不会出错的代码。非稳定代码`catch`尽可能进行区分异常类型，再做对应的异常处理
+2. 【强制】`catch`时分清稳定代码和非稳定代码，稳定代码指无论如何不会出错的代码。非稳定代码`catch`尽可能进行区分异常类型，再做对应的异常处理
    <br><span style="color:orange">说明</span>：对大段代码进行`try-catch`，使程序无法根据不同的异常做出正确的应激反应，
 也不利于定位问题，这是一种不负责任的表现
    <br><span style="color:green">正例</span>：用户注册的场景中，如果用户输入非法字符，或用户名称已存在，或用户输入密码过于简单，
@@ -680,7 +707,7 @@
     - 远程调用返回对象时，一律要求进行空指针判断，防止`NPE`
     - 对于`Session`中获取的数据，建议`NPE`检查，避免空指针
     - 级联调用`obj.getA().getB().getC()`；一连串调用，易产生`NPE`
-      <br><span style="color:green">正例</span>：使用`JDK8`的`Optional`类来防止`NPE`问题
+    <br><span style="color:green">正例</span>：使用`JDK8`的`Optional`类来防止`NPE`问题
 11. 【推荐】定义时区分`unchecked`/`checked`异常，避免直接抛出`new RuntimeException()`，更不允许抛出`Exception`或者`Throwable`，
 应使用有业务含义的自定义异常。推荐业界已定义过的自定义异常，如：`DAOException`/`ServiceException`等
 12. 【参考】对于公司外的`http`/`api`开放接口必须使用“错误码”；而应用内部推荐异常抛出；
@@ -700,6 +727,7 @@
 
 1. 【强制】应用中不可直接使用日志系统（`Log4j`、`Logback`）中的API，而应依赖使用日志框架`SLF4J`中的`API`，使用门面模式的日志框架，
 有利于维护和各个类的日志处理方式统一
+
     ```java
     import org.slf4j.Logger;
     import org.slf4j.LoggerFactory;
@@ -718,6 +746,7 @@
    <br><span style="color:orange">说明</span>：`logger.debug("..." + symbol);`如果日志级别是`warn`，上述日志不会打印，
 但是会执行字符串拼接操作，如果`symbol`是对象，会执行`toString()`方法，浪费了系统资源，执行了上述操作，最终日志却没有打印
    <br><span style="color:green">正例</span>：
+
     ```java
     （条件）
     if (logger.isDebugEnabled()) {
@@ -729,13 +758,14 @@
     （占位符）
     logger.debug("按编号进行处理：{}，变量是：{}", id, symbol);
     ```
-5. 【强制】避免重复打印日志，浪费磁盘空间，务必在`log4j.xml`中设置`<logger name="com.taobao.dubbo.config" additivity="false">`
-6. 【强制】异常信息应该包括两类信息：案发现场信息和异常堆栈信息。如果不处理，那么通过关键字`throws`往上抛出
+1. 【强制】避免重复打印日志，浪费磁盘空间，务必在`log4j.xml`中设置`<logger name="com.taobao.dubbo.config" additivity="false">`
+2. 【强制】异常信息应该包括两类信息：案发现场信息和异常堆栈信息。如果不处理，那么通过关键字`throws`往上抛出
    <br><span style="color:green">正例</span>：
+
     ```java
-   logger.error(各类参数或者对象toString + "_" + e.getMessage(), e);
+    logger.error(各类参数或者对象toString + "_" + e.getMessage(), e);
     ```
-7. 【推荐】谨慎地记录日志。生产环境禁止输出debug日志；有选择地输出info日志；如果使用warn来记录刚上线时的业务行为信息，
+3. 【推荐】谨慎地记录日志。生产环境禁止输出debug日志；有选择地输出info日志；如果使用warn来记录刚上线时的业务行为信息，
 一定要注意日志输出量的问题，避免把服务器磁盘撑爆，并记得及时删除这些观察日志
    <br><span style="color:orange">说明</span>：大量地输出无效日志，不利于系统性能提升，也不利于快速定位错误点。
 记录日志时请思考：这些日志真的有人看吗？看到这条日志你能做什么？能不能给问题排查带来好处？
@@ -806,7 +836,7 @@
     <br><span style="color:green">正例</span>：如下表，其中无符号值可以避免误存负数，且扩大了表示范围
 
     | 对象     | 年龄区间    | 类型              | 字节 |
-    |---------| :-------- | :---------------- | :--- |
+    | -------- | :--------- | :---------------- | :--- |
     | 人       | 150岁之内  | unsigned tinyint  | 1    |
     | 龟       | 数百岁     | unsigned smallint | 2    |
     | 恐龙化石 | 数千万岁    | unsigned int      | 4    |
@@ -820,8 +850,8 @@
 2. 【强制】超过三个表禁止`join`。需要`join`的字段，数据类型必须绝对一致；多表关联查询时，保证被关联的字段需要有索引
    <br><span style="color:orange">说明</span>：即使双表`join`也要注意表索引、`SQL`性能
 3. 【强制】在`varchar`字段上建立索引时，必须指定索引长度，没必要对全字段建立索引，根据实际文本区分度决定索引长度即可
-   <br><span style="color:orange">说明</span>：索引的长度与区分度是一对矛盾体，一般对字符串类型数据，长度为20的索引，
-区分度会高达90%以上，可以使用`count(distinct left(列名, 索引长度))/count(*)`的区分度来确定
+   <br><span style="color:orange">说明</span>：索引的长度与区分度是一对矛盾体，一般对字符串类型数据，长度为`20`的索引，
+区分度会高达90%以上，可以使用`count(distinct left(列名, 索引长度)) / count(*)`的区分度来确定
 4. 【强制】页面搜索严禁左模糊或者全模糊，如果需要请走搜索引擎来解决
    <br><span style="color:orange">说明</span>：索引文件具有`B-Tree`的最左前缀匹配特性，如果左边的值未确定，那么无法使用此索引
 5. 【推荐】如果有order by的场景，请注意利用索引的有序性。`order by`最后的字段是组合索引的一部分，并且放在索引组合顺序的最后，
@@ -837,10 +867,11 @@
    <br><span style="color:orange">说明</span>：`MySQL`并不是跳过`offset`行，而是取`offset+N`行，然后返回放弃前`offset`行，
 返回`N`行，那当`offset`特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行`SQL`改写
    <br><span style="color:green">正例</span>：先快速定位需要获取的`id`段，然后再关联：
+
     ```sql
     SELECT a.* FROM 表1 a, (SELECT id FROM 表1 WHERE 条件 LIMIT 100000, 20) b WHERE a.id = b.id
     ```
-8. 【推荐】 `SQL`性能优化的目标：至少要达到r`ange`级别，要求是`ref`级别，如果可以是`consts`最好
+1. 【推荐】`SQL`性能优化的目标：至少要达到r`ange`级别，要求是`ref`级别，如果可以是`consts`最好
    <br><span style="color:orange">说明</span>：
     - consts：单表中最多只有一个匹配行（主键或者唯一索引），在优化阶段即可读取到数据
     - ref：指的是使用普通的索引（`normal index`）
@@ -866,6 +897,7 @@
 注意`count(distinct col1, col2)`如果其中一列全为`NULL`，那么即使另一列有不同的值，也返回为0
 3. 【强制】当某一列的值全是`NULL`时，`count(col)`的返回结果为0，但`sum(col)`的返回结果为`NULL`，因此使用`sum()`时需注意`NPE`问题
    <br><span style="color:green">正例</span>：可以使用如下方式来避免`sum`的`NPE`问题：
+
     ```sql
    SELECT IF(ISNULL(SUM(g)),0,SUM(g)) FROM table;
     ```
@@ -883,6 +915,7 @@
 9. 【推荐】`in`操作能避免则避免，若实在避免不了，需要仔细评估`in`后边的集合元素数量，控制在1000个之内
 10. 【参考】如果有全球化需要，所有的字符存储与表示，均以`utf-8`编码，注意字符统计函数的区别
     <br><span style="color:orange">说明</span>：
+
     ```sql
     SELECT LENGTH("轻松工作"); # 返回为12
     SELECT CHARACTER_LENGTH("轻松工作"); # 返回为4
@@ -908,15 +941,16 @@
    <br><span style="color:orange">说明</span>：其实现方式是在数据库取到`statementName`对应的`SQL`语句的所有记录，
 再通过`subList`取`start`和`size`的子集合
    <br><span style="color:green">正例</span>：
+
     ```java
     Map<String, Object> map = new HashMap<String, Object>();
     map.put("start", start);
     map.put("size", size);
     ```
-6. 【强制】不允许直接拿`HashMap`与`Hashtable`作为查询结果集的输出
+1. 【强制】不允许直接拿`HashMap`与`Hashtable`作为查询结果集的输出
    <br><span style="color:orange">说明</span>：`resultClass="Hashtable"`，会置入字段名和属性值，但是值的类型不可控
-7. 【强制】更新数据表记录时，必须同时更新记录对应的`gmt_modified`字段值为当前时间
-8. 【推荐】不要写一个大而全的数据更新接口。传入为`POJO`类，不管是不是自己的目标更新字段，
+2. 【强制】更新数据表记录时，必须同时更新记录对应的`gmt_modified`字段值为当前时间
+3. 【推荐】不要写一个大而全的数据更新接口。传入为`POJO`类，不管是不是自己的目标更新字段，
 都进行`update table set c1 = value1, c2 = value2, c3 = value3;`这是不对的。
 执行SQL时，不要更新无改动的字段，一是易出错；二是效率低；三是增加`binlog`存储
 9. 【参考】`@Transactional`事务不要滥用。事务会影响数据库的QPS，另外使用事务的地方需要考虑各方面的回滚方案，
