@@ -129,7 +129,7 @@
     ```java
     if (空格a == b空格)
     ```
-3. 【强制】if/for/while/switch/do等保留字与括号之间都必须加空格
+3. 【强制】`if` / `for` / `while` / `switch` / `do`等保留字与括号之间都必须加空格
 4. 【强制】任何二目、三目运算符的左右两边都需要加一个空格
    <br><span style="color:orange">说明</span>：运算符包括赋值运算符=、逻辑运算符&&、加减乘除符号等
 5. 【强制】采用4个空格缩进，禁止使用tab字符
@@ -237,7 +237,7 @@
    <br><span style="color:orange">说明</span>：可变参数必须放置在参数列表的最后（提倡同学们尽量不用可变参数编程）
    <br><span style="color:green">正例</span>：
     ```java
-    public User getUsers(String type, Integer... ids) {...}
+    public User getUsers(String type, Integer... ids) { /*...*/ }
     ```
 4. 【强制】外部正在调用或者`二方库`依赖的接口，不允许修改方法签名，避免对接口调用方产生影响。接口过时必须加`@Deprecated`注解，
 并清晰地说明采用的新接口或者新服务是什么
@@ -282,10 +282,10 @@
     System.out.println(ary.length);
     ```
 14. 【推荐】当一个类有多个构造方法，或者多个同名方法，这些方法应该按顺序放置在一起，便于阅读，此条规则优先于第15条规则
-15. 【推荐】类内方法定义的顺序依次是：`公有方法或保护方法` > `私有方法` > `getter/setter方法`
+15. 【推荐】类内方法定义的顺序依次是：`公有方法或保护方法` > `私有方法` > `getter` / `setter`方法
     <br><span style="color:orange">说明</span>：公有方法是类的调用者和维护者最关心的方法，首屏展示最好；
 保护方法虽然只是子类关心，也可能是“模板设计模式”下的核心方法；而私有方法外部一般不需要特别关心，是一个黑盒实现；
-因为承载的信息价值较低，所有Service和DAO的getter/setter方法放在类体最后
+因为承载的信息价值较低，所有`Service`和`DAO`的`getter` / `setter`方法放在类体最后
 16. 【推荐】setter方法中，参数名称与类成员变量名称一致，`this.成员名 = 参数名`。在`getter`/`setter`方法中，不要增加业务逻辑，增加排查问题的难度。
     <br><span style="color:red">反例</span>：
     ```java
@@ -324,7 +324,7 @@
     - 若是`static`成员变量，必须考虑是否为`final`
     - 类成员方法只供类内部调用，必须是`private`
     - 类成员方法只对继承类公开，那么限制为`protected`
-      <br><span style="color:orange">说明</span>：任何类、方法、参数、变量，严控访问范围。过于宽泛地访问范围，不利于模块解耦。
+   <br><span style="color:orange">说明</span>：任何类、方法、参数、变量，严控访问范围。过于宽泛地访问范围，不利于模块解耦。
 思考：如果是一个`private`的方法，想删除就删除，可是一个`public`的`service`成员方法或成员变量，删除一下，不得手心冒点汗吗？
 变量像自己的小孩，尽量在自己的视线内，变量作用域太大，无限制的到处跑，那么你会担心的
 
@@ -334,7 +334,7 @@
     - 只要重写`equals`，就必须重写`hashCode`
     - 因为`Set`存储的是不重复的对象，依据`hashCode`和`equals`进行判断，所以`Set`存储的对象必须重写这两个方法
     - 如果自定义对象作为`Map`的键，那么必须重写`hashCode`和`equals`
-      <br><span style="color:orange">说明</span>：`String`重写了`hashCode`和`equals`方法，
+   <br><span style="color:orange">说明</span>：`String`重写了`hashCode`和`equals`方法，
 所以我们可以非常愉快地使用`String`对象作为`key`来使用
 2. 【强制】`ArrayList`的`subList`结果不可强转成`ArrayList`，否则会抛出`ClassCastException`异常，
 即`java.util.RandomAccessSubList cannot be cast to java.util.ArrayList`
@@ -381,7 +381,7 @@
     }
     ```
    <span style="color:red">反例</span>：
-     ```java
+    ```java
     List<String> list = new ArrayList<String>();
     list.add("1");
     list.add("2");
@@ -430,8 +430,9 @@
     <span style="color:red">反例</span>：由于`HashMap`的干扰，很多人认为`ConcurrentHashMap`是可以置入`null`值，而事实上，
 存储`null`值时会抛出`NPE`异常
 12. 【参考】合理利用好集合的`有序性sort`和`稳定性order`，避免集合的`无序性unsort`和`不稳定性unorder`带来的负面影响
-    <br><span style="color:orange">说明</span>：有序性是指遍历的结果是按某种比较规则依次排列的。稳定性指集合每次遍历的元素次序是一定的。
-如：`ArrayList`是`order`/`unsort`；`HashMap`是`unorder`/`unsort`；`TreeSet`是`order`/`sort`
+    <br><span style="color:orange">说明</span>：有序性是指遍历的结果是按某种比较规则依次排列的。
+稳定性指集合每次遍历的元素次序是一定的。如：`ArrayList`是`order` / `unsort`；`HashMap`是`unorder` / `unsort`；
+`TreeSet`是`order` / `sort`
 
 ## 并发处理
 
@@ -450,8 +451,8 @@
 3. 【强制】线程资源必须通过线程池提供，不允许在应用中自行显式创建线程
    <br><span style="color:orange">说明</span>：使用线程池的好处是减少在创建和销毁线程上所花的时间以及系统资源的开销，
 解决资源不足的问题。如果不使用线程池，有可能造成系统创建大量同类线程而导致消耗完内存或者“过度切换”的问题
-4. 【强制】线程池不允许使用`Executors`去创建，而是通过`ThreadPoolExecutor`的方式，这样的处理方式让写的同学更加明确线程池的运行规则，
-规避资源耗尽的风险
+4. 【强制】线程池不允许使用`Executors`去创建，而是通过`ThreadPoolExecutor`的方式，
+这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险
    <br><span style="color:orange">说明</span>：`Executors`返回的线程池对象的弊端如下：
     - `FixedThreadPool`和`SingleThreadPool`：允许的请求队列长度为`Integer.MAX_VALUE`，可能会堆积大量的请求，从而导致`OOM`
     - `CachedThreadPool`和`ScheduledThreadPool`：允许的创建线程数量为`Integer.MAX_VALUE`，可能会创建大量的线程，从而导致`OOM`
@@ -533,8 +534,10 @@
 4. 【推荐】表达异常的分支时，少用`if-else`方式，这种方式可以改写成：
     ```java
     if (condition) {
-        ...
-        return obj;
+         // ...
+
+         // 记住换行
+         return obj;
     }
     // 接着写else的业务逻辑代码;
     ```
@@ -587,12 +590,12 @@
     - 调用频次低的方法
     - 执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退，或者错误，那得不偿失
     - 需要极高稳定性和可用性的方法
-    - 对外提供的开放接口，不管是`RPC`/`API`/`HTTP`接口
+    - 对外提供的开放接口，不管是`RPC` / `API` / `HTTP`接口
     - 敏感权限入口
 10. 【参考】下列情形，不需要进行参数校验：
     - 极有可能被循环调用的方法。但在方法说明里必须注明外部参数检查要求
     - 底层调用频度比较高的方法。毕竟是像纯净水过滤的最后一道，参数错误不太可能到底层才会暴露问题。一般`DAO`层与`Service`层都在同一个应用中，
-部署在同一台服务器中，所以DAO的参数校验，可以省略
+部署在同一台服务器中，所以`DAO`的参数校验，可以省略
     - 被声明成`private`只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数
 
 ## 注释规约
@@ -618,7 +621,7 @@
 10. 【参考】良好地命名、代码结构是自解释的，注释力求精简准确、表达到位。避免出现注释的一个极端：过多过滥的注释，代码的逻辑一旦修改，修改注释是相当大的负担。
     <br><span style="color:red">反例</span>：
      ```java
-     // put elephant into fridge
+     // 把elephant放进fridge
      put(elephant, fridge);
      方法名put，加上两个有意义的变量名elephant和fridge，已经说明了这是在干什么，语义清晰的代码不需要额外的注释
      ```
@@ -635,8 +638,20 @@
 比如：`NullPointerException`，`IndexOutOfBoundsException`等
    <span style="color:orange">说明</span>：无法通过预检查的异常除外，比如，在解析字符串形式的数字时，
 不得不通过`catch NumberFormatException`来实现
-   <br><span style="color:green">正例</span>：`if (obj != null) {...}`
-   <span style="color:red">反例</span>：`try { obj.method() } catch (NullPointerException e) {...}`
+   <br><span style="color:green">正例</span>：
+    ```java
+    if (obj != null) {
+        // ...
+    }
+    ```
+   <span style="color:red">反例</span>：
+    ```java
+    try {
+        obj.method();
+    } catch (NullPointerException e) {
+        // ...
+    }
+    ```
 2. 【强制】异常不要用来做流程控制，条件控制
    <br><span style="color:orange">说明</span>：异常设计的初衷是解决程序运行中的各种意外情况，且异常地处理效率比条件判断方式要低很多
 3. 【强制】`catch`时分清稳定代码和非稳定代码，稳定代码指无论如何不会出错的代码。非稳定代码`catch`尽可能进行区分异常类型，再做对应的异常处理
@@ -659,7 +674,7 @@
 对调用者来说，也并非高枕无忧，必须考虑到远程调用失败、序列化失败、运行时异常等场景返回`null`的情况
 10. 【推荐】防止`NPE`，是程序员的基本修养，注意`NPE`产生的场景：
     - 返回类型为基本数据类型，`return`包装数据类型的对象时，自动拆箱有可能产生`NPE`
-      <span style="color:red">反例</span>：`public int f() { return Integer对象 }`，如果为`null`，自动解箱抛`NPE`
+    <br><span style="color:red">反例</span>：`public int f() { return Integer对象 }`，如果为`null`，自动解箱抛`NPE`
     - 数据库的查询结果可能为`null`
     - 集合里的元素即使`isNotEmpty`，取出的数据元素也可能为`null`
     - 远程调用返回对象时，一律要求进行空指针判断，防止`NPE`
@@ -675,7 +690,7 @@
     - 如果不加栈信息，只是`new`自定义异常，加入自己的理解的`error message`，对于调用端解决问题的帮助不会太多。
 如果加了栈信息，在频繁调用出错的情况下，数据序列化和传输的性能损耗也是问题
 
-13. 【参考】避免出现重复的代码，即DRY（Don’t Repeat Yourself）原则
+13. 【参考】避免出现重复的代码，即`DRY（Don’t Repeat Yourself）`原则
     <br><span style="color:orange">说明</span>：随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。
 必要时抽取共性方法，或者抽象公共类，甚至是组件化。
     <br><span style="color:green">正例</span>：一个类中有多个`public`方法，都需要进行数行相同的参数校验操作，这个时候请抽取：
