@@ -151,7 +151,7 @@
             System.out.println("say");
         }
         // 左大括号前加空格且不换行；左大括号后换行
-        if (flag == 1) {
+        if (1 == flag) {
             System.out.println("world");
             // 右大括号前换行，右大括号后有else，不用换行
         } else {
